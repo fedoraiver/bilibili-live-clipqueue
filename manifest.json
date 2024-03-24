@@ -1,5 +1,9 @@
 {
   "manifest_version": 3,
   "version": "1.0.5",
-  "name": "bilibili-live-clipqueue"
+  "name": "bilibili-live-clipqueue",
+  "icons": { "200": "./favicon.png" },
+  "action": {
+    "default_popup": "./index.html"
+  }
 }
