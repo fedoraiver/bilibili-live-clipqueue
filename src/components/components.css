@@ -1,0 +1,16 @@
+.UserInputDiv-width {
+  max-width: 520px;
+}
+
+.UserInputSpan-width {
+  display: inline-block;
+  width: 160px;
+}
+
+.NavBarA-width {
+  width: 100px;
+}
+
+.UserInputTextArea-width {
+  width: 520px;
+}
