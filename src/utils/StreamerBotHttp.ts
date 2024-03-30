@@ -1,5 +1,5 @@
 export function GetActions(StreamerBotHttpServerUrl: string) {
-  fetch(`${StreamerBotHttpServerUrl}/GetActions`, {
+  fetch(`http://${StreamerBotHttpServerUrl}/GetActions`, {
     method: "Get",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export function DoAction(
   name: string,
   data: any
 ) {
-  fetch(`${StreamerBotHttpServerUrl}/DoAction`, {
+  fetch(`http://${StreamerBotHttpServerUrl}/DoAction`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

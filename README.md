@@ -112,11 +112,7 @@ homepage
 
 MyClipQueue sessiondata
 
-web extension
-
 darkmode toggle
-
-browser extension/electron desktop app
 
 website ui
 

@@ -107,6 +107,7 @@ function UserInput() {
         <span className="input-group-text UserInputSpan-width">
           HTTP服务器地址
         </span>
+        <span className="input-group-text">http://</span>
         <input
           type="text"
           className="form-control"
