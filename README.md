@@ -100,7 +100,7 @@ history ui ✓
 
 connection with streamer.bot(build a user interface) ✓
 
-add connenction indicator
+add connenction indicator and reconnet feature
 
 in queue page add acceptvideo button
 
