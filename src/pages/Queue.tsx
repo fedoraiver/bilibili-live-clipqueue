@@ -18,7 +18,6 @@ function Queue() {
   useEffect(() => {
     live.on("heartbeat", () => console.log("running"));
     live.on("msg", (data) => {
-      console.log(data);
       setCmd(data.cmd);
       setWssData(JSON.stringify(data.data));
     });
@@ -36,7 +35,6 @@ function Queue() {
         !MyClipQueue.has(msg) &&
         !MyClipQueue.isFull()
       ) {
-        console.log("enqueue", MyClipQueue.enqueue(msg));
         setClipNum(MyClipQueue.Num());
       }
       CustomScriptAction(StreamerBotHttpServerUrl, CustomScript, cmd, JsonData);

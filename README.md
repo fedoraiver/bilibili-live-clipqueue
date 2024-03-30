@@ -104,6 +104,8 @@ readme add streamer.bot intergration description ✓
 
 add connenction indicator and reconnet feature
 
+write and draw project data structure
+
 in queue page add acceptvideo button
 
 add home clear button
