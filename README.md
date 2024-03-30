@@ -100,13 +100,13 @@ history ui ✓
 
 connection with streamer.bot(build a user interface) ✓
 
+readme add streamer.bot intergration description ✓
+
 add connenction indicator and reconnet feature
 
 in queue page add acceptvideo button
 
 add home clear button
-
-readme add streamer.bot intergration description
 
 homepage
 
@@ -123,5 +123,3 @@ website ui
 youtube video support
 
 danmaku
-
-jsonp ☓

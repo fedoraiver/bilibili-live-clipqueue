@@ -73,7 +73,7 @@ function UserInput() {
         <input
           type="password"
           className="form-control"
-          placeholder="必填,直播间开播后可见"
+          placeholder="必填,互动应用中心-右下角菜单-身份码"
           aria-describedby="addon-wrapping"
           value={AuthCode}
           onChange={(e) => {
