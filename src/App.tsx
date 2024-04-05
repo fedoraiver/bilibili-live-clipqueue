@@ -27,6 +27,8 @@ export interface Data {
   setStreamerBotHttpServerUrl: (StreamerBotHttpServerUrl: string) => void;
   CustomScript: string;
   setCustomScript: (CustomScript: string) => void;
+  IsReceived: boolean;
+  setIsReceived: (IsReceived: boolean) => void;
   MyClipQueue: ClipQueue;
   live: KeepLiveWS;
 }
@@ -50,6 +52,9 @@ function App() {
   );
   const [CustomScript, setCustomScript] = useState(
     localStorage.getItem("CustomScript") || ""
+  );
+  const [IsReceived, setIsReceived] = useState(
+    localStorage.getItem("IsReceived") == "true" ? true : false
   );
 
   useEffect(() => {
@@ -101,6 +106,8 @@ function App() {
           setStreamerBotHttpServerUrl,
           CustomScript,
           setCustomScript,
+          IsReceived,
+          setIsReceived,
           MyClipQueue,
           live,
         }}

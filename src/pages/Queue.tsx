@@ -4,10 +4,13 @@ import { DataContext } from "../App";
 import BiliBiliVideo from "../components/BilibiliVideo";
 import Button from "../components/Button";
 import ScoreBoard from "../components/ScoreBoard";
+import Switch from "../components/Switch";
 import { CustomScriptAction } from "../utils/StreamerBotHttp";
 
 function Queue() {
-  let { ClipLimit, MyClipQueue, live } = useContext(DataContext) as Data;
+  let { ClipLimit, IsReceived, setIsReceived, MyClipQueue, live } = useContext(
+    DataContext
+  ) as Data;
   const [ClipNum, setClipNum] = useState(MyClipQueue.Num());
   const [wssData, setWssData] = useState("{}");
   const [cmd, setCmd] = useState("");
@@ -32,6 +35,7 @@ function Queue() {
     if (cmd === "LIVE_OPEN_PLATFORM_DM") {
       let msg: string = JsonData.msg;
       if (
+        IsReceived == true &&
         msg.startsWith("/BV") &&
         !MyClipQueue.has(msg) &&
         !MyClipQueue.isFull()
@@ -69,6 +73,14 @@ function Queue() {
           }
         }}
       ></Button>
+      <Switch
+        SwitchName="是否接受视频"
+        Checked={IsReceived}
+        ClickHandler={(value) => {
+          setIsReceived(value);
+          localStorage.setItem("IsReceived", value.toString());
+        }}
+      ></Switch>
       <ScoreBoard
         ClipNum={ClipNum}
         ClipLimit={MyClipQueue.getCapacity()}
