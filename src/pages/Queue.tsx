@@ -18,6 +18,7 @@ function Queue() {
   useEffect(() => {
     live.on("heartbeat", () => console.log("running"));
     live.on("msg", (data) => {
+      console.log(data);
       setCmd(data.cmd);
       setWssData(JSON.stringify(data.data));
     });
@@ -25,20 +26,21 @@ function Queue() {
 
   useEffect(() => {
     let JsonData = JSON.parse(wssData);
+    let StreamerBotHttpServerUrl =
+      localStorage.getItem("StreamerBotHttpServerUrl") || "";
+    let CustomScript = localStorage.getItem("CustomScript") || "";
     if (cmd === "LIVE_OPEN_PLATFORM_DM") {
       let msg: string = JsonData.msg;
-      let StreamerBotHttpServerUrl =
-        localStorage.getItem("StreamerBotHttpServerUrl") || "";
-      let CustomScript = localStorage.getItem("CustomScript") || "";
       if (
         msg.startsWith("/BV") &&
         !MyClipQueue.has(msg) &&
         !MyClipQueue.isFull()
       ) {
+        MyClipQueue.enqueue(msg);
         setClipNum(MyClipQueue.Num());
       }
-      CustomScriptAction(StreamerBotHttpServerUrl, CustomScript, cmd, JsonData);
     }
+    CustomScriptAction(StreamerBotHttpServerUrl, CustomScript, cmd, JsonData);
   }, [wssData]);
 
   useEffect(() => {
