@@ -34,17 +34,26 @@ function Queue() {
     let CustomScript = localStorage.getItem("CustomScript") || "";
     if (cmd === "LIVE_OPEN_PLATFORM_DM") {
       let msg: string = JsonData.msg;
-      if (
-        IsReceived == true &&
-        msg.startsWith("/BV") &&
-        !MyClipQueue.has(msg) &&
-        !MyClipQueue.isFull()
-      ) {
-        MyClipQueue.enqueue(msg);
-        setClipNum(MyClipQueue.Num());
+      if (IsReceived == true) {
+        if (
+          msg.startsWith("/BV") &&
+          !MyClipQueue.has(msg) &&
+          !MyClipQueue.isFull()
+        ) {
+          MyClipQueue.enqueue(msg);
+          setClipNum(MyClipQueue.Num());
+        } else if (!msg.startsWith("/BV")) {
+          CustomScriptAction(
+            StreamerBotHttpServerUrl,
+            CustomScript,
+            cmd,
+            JsonData
+          );
+        }
       }
+    } else {
+      CustomScriptAction(StreamerBotHttpServerUrl, CustomScript, cmd, JsonData);
     }
-    CustomScriptAction(StreamerBotHttpServerUrl, CustomScript, cmd, JsonData);
   }, [wssData]);
 
   useEffect(() => {
