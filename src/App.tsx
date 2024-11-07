@@ -69,13 +69,10 @@ function App() {
       AuthCode ? AuthCode : ""
     )
       .then((data) => {
-        let newlive = new KeepLiveWS(
-          data.anchor_info.room_id,
-          {
-            address: data.websocket_info.wss_link[0],
-            authBody: JSON.parse(data.websocket_info.auth_body),
-          } || { protover: 3, uid: 0 }
-        );
+        let newlive = new KeepLiveWS(data.anchor_info.room_id, {
+          address: data.websocket_info.wss_link[0],
+          authBody: JSON.parse(data.websocket_info.auth_body),
+        });
         newlive.interval = 1000;
         setLive(newlive);
       })

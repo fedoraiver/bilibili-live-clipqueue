@@ -86,6 +86,8 @@ with autoplay and muteaudio
 
 ## To Do
 
+multithread!!!!
+
 navbar ✓
 
 userinput ✓
