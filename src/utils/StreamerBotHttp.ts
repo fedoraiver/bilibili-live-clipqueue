@@ -45,8 +45,14 @@ export function CustomScriptAction(
   JsonData: any
 ) {
   const lines = CustomScript.split("\n");
-  lines.forEach((line) => {
-    const [command, action] = line.split(" ");
+  lines.forEach((line, index) => {
+    const parts = line.trim().split(/\s+/); // 使用正则处理多个空格
+    if (parts.length < 2) {
+      console.warn(`Line ${index + 1} skipped: invalid format "${line}"`);
+      return; // 跳过格式不对的行
+    }
+
+    const [command, action] = parts;
     if (command === cmd) {
       DoAction(StreamerBotHttpServerUrl, action, JsonData);
     }
