@@ -83,7 +83,7 @@ function Queue() {
         }}
       ></Button>
       <Switch
-        SwitchName="是否接受视频"
+        SwitchName="运行"
         Checked={IsReceived}
         ClickHandler={(value) => {
           setIsReceived(value);
