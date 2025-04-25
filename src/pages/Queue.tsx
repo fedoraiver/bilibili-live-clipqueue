@@ -8,7 +8,7 @@ import Switch from "../components/Switch";
 import { CustomScriptAction } from "../utils/StreamerBotHttp";
 
 function Queue() {
-  let { ClipLimit, IsReceived, setIsReceived, MyClipQueue, live } = useContext(
+  let { ClipLimit, IsRunning, setIsRunning, MyClipQueue, live } = useContext(
     DataContext
   ) as Data;
   const [ClipNum, setClipNum] = useState(MyClipQueue.Num());
@@ -34,7 +34,7 @@ function Queue() {
     let CustomScript = localStorage.getItem("CustomScript") || "";
     if (cmd === "LIVE_OPEN_PLATFORM_DM") {
       let msg: string = JsonData.msg;
-      if (IsReceived == true) {
+      if (IsRunning == true) {
         if (
           msg.startsWith("/BV") &&
           !MyClipQueue.has(msg) &&
@@ -84,10 +84,10 @@ function Queue() {
       ></Button>
       <Switch
         SwitchName="运行"
-        Checked={IsReceived}
+        Checked={IsRunning}
         ClickHandler={(value) => {
-          setIsReceived(value);
-          localStorage.setItem("IsReceived", value.toString());
+          setIsRunning(value);
+          localStorage.setItem("IsRunning", value.toString());
         }}
       ></Switch>
       <ScoreBoard
