@@ -8,9 +8,15 @@ import Switch from "../components/Switch";
 import { CustomScriptAction } from "../utils/StreamerBotHttp";
 
 function Queue() {
-  let { ClipLimit, IsRunning, setIsRunning, MyClipQueue, live } = useContext(
-    DataContext
-  ) as Data;
+  let {
+    ClipLimit,
+    IsRunning,
+    setIsRunning,
+    Autoplay,
+    setAutoplay,
+    MyClipQueue,
+    live,
+  } = useContext(DataContext) as Data;
   const [ClipNum, setClipNum] = useState(MyClipQueue.Num());
   const [wssData, setWssData] = useState("{}");
   const [cmd, setCmd] = useState("");
@@ -32,9 +38,9 @@ function Queue() {
     let StreamerBotHttpServerUrl =
       localStorage.getItem("StreamerBotHttpServerUrl") || "";
     let CustomScript = localStorage.getItem("CustomScript") || "";
-    if (cmd === "LIVE_OPEN_PLATFORM_DM") {
-      let msg: string = JsonData.msg;
-      if (IsRunning == true) {
+    if (IsRunning == true) {
+      if (cmd === "LIVE_OPEN_PLATFORM_DM") {
+        let msg: string = JsonData.msg;
         if (
           msg.startsWith("/BV") &&
           !MyClipQueue.has(msg) &&
@@ -42,16 +48,8 @@ function Queue() {
         ) {
           MyClipQueue.enqueue(msg);
           setClipNum(MyClipQueue.Num());
-        } else if (!msg.startsWith("/BV")) {
-          CustomScriptAction(
-            StreamerBotHttpServerUrl,
-            CustomScript,
-            cmd,
-            JsonData
-          );
         }
       }
-    } else {
       CustomScriptAction(StreamerBotHttpServerUrl, CustomScript, cmd, JsonData);
     }
   }, [wssData]);
@@ -60,8 +58,11 @@ function Queue() {
     setSrc(
       MyClipQueue.getFirst()
         ? "https://player.bilibili.com/player.html?bvid=" +
-            MyClipQueue.getFirst()?.substring(1) +
-            "&autoplay=0"
+          MyClipQueue.getFirst()?.substring(1) +
+          "&autoplay=" +
+          Autoplay
+          ? "1"
+          : "0"
         : ""
     );
   }, [ClipNum]);
@@ -88,6 +89,14 @@ function Queue() {
         ClickHandler={(value) => {
           setIsRunning(value);
           localStorage.setItem("IsRunning", value.toString());
+        }}
+      ></Switch>
+      <Switch
+        SwitchName="自动播放"
+        Checked={Autoplay}
+        ClickHandler={(value) => {
+          setAutoplay(value);
+          localStorage.setItem("Autoplay", value.toString());
         }}
       ></Switch>
       <ScoreBoard

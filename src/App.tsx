@@ -29,6 +29,8 @@ export interface Data {
   setCustomScript: (CustomScript: string) => void;
   IsRunning: boolean;
   setIsRunning: (IsRunning: boolean) => void;
+  Autoplay: boolean;
+  setAutoplay: (Autoplay: boolean) => void;
   MyClipQueue: ClipQueue;
   live: KeepLiveWS;
 }
@@ -55,6 +57,9 @@ function App() {
   );
   const [IsRunning, setIsRunning] = useState(
     localStorage.getItem("IsRunning") == "true" ? true : false
+  );
+  const [Autoplay, setAutoplay] = useState(
+    localStorage.getItem("Autoplay") == "true" ? true : false
   );
 
   useEffect(() => {
@@ -105,6 +110,8 @@ function App() {
           setCustomScript,
           IsRunning,
           setIsRunning,
+          Autoplay,
+          setAutoplay,
           MyClipQueue,
           live,
         }}
