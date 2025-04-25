@@ -58,11 +58,9 @@ function Queue() {
     setSrc(
       MyClipQueue.getFirst()
         ? "https://player.bilibili.com/player.html?bvid=" +
-          MyClipQueue.getFirst()?.substring(1) +
-          "&autoplay=" +
-          Autoplay
-          ? "1"
-          : "0"
+            MyClipQueue.getFirst()?.substring(1) +
+            "&autoplay=" +
+            (Autoplay ? "1" : "0")
         : ""
     );
   }, [ClipNum]);
