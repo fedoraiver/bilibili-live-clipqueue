@@ -74,41 +74,17 @@ npm run dev
 
 ## Bug To Fix
 
-scoreboard not update bug ✓
-
-MyClipQueue local in queue page issue ✓
+autoplay history bug
 
 wss connect issue
-
-video quality issue
-
-with autoplay and muteaudio
 
 ## To Do
 
 multithread!!!!
 
-navbar ✓
-
-userinput ✓
-
-localstorage ✓
-
-add history clear button ✓
-
-history localstorage ✓
-
-history ui ✓
-
-connection with streamer.bot(build a user interface) ✓
-
-readme add streamer.bot intergration description ✓
-
 add connenction indicator and reconnet feature
 
 write and draw project data structure
-
-in queue page add acceptvideo button ✓
 
 add home clear button
 
