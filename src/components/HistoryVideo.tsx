@@ -10,11 +10,14 @@ interface HistortyVideoProps {
 function HistortyVideo({ bvid }: HistortyVideoProps) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [coverUrl, setCoverUrl] = useState("");
   let { MyClipQueue } = useContext(DataContext) as Data;
   const [isRendered, setIsRendered] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`)
+    fetch(
+      `https://apiv2.magecorn.com/bilicover/get?type=bv&id=${bvid}&client=2.6.0`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -22,8 +25,9 @@ function HistortyVideo({ bvid }: HistortyVideoProps) {
         return response.json();
       })
       .then((data) => {
-        setTitle(data.data.title);
-        setAuthor(data.data.owner.name);
+        setTitle(data.title);
+        setAuthor(data.up);
+        setCoverUrl(data.url.replace(/^http:/, "https:"));
       })
       .catch((error) => {
         console.error("fetch api.bilibili.com Error:", error);
