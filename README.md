@@ -74,8 +74,6 @@ npm run dev
 
 ## Bug To Fix
 
-autoplay history bug
-
 wss connect issue
 
 ## To Do
