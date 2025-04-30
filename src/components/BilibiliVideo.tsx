@@ -4,7 +4,7 @@ interface BiliBiliVideoProps {
 
 function BiliBiliVideo({ src }: BiliBiliVideoProps) {
   return (
-    <div className="ratio ratio-21x9">
+    <div className="ratio ratio-16x9">
       <iframe
         src={src}
         sandbox="allow-same-origin allow-scripts"
