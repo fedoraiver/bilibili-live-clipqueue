@@ -6,7 +6,7 @@ Bilibili 直播切片队列
 
 并且增加了对[streamer.bot](https://streamer.bot/)的支持!!!!!
 
-这是一个用 react 编写的项目,参考了[bilibili-live-chat](https://github.com/Tsuk1ko/bilibili-live-chat)和[bilibili-live-ws](https://github.com/simon300000/bilibili-live-ws)
+这是一个用 react 编写的项目,参考了[bilibili-live-chat](https://github.com/Tsuk1ko/bilibili-live-chat),[bilibili-live-ws](https://github.com/simon300000/bilibili-live-ws)和[magecorn](https://bilicover.magecorn.com/)
 
 成品部署在 github pages 上,使用者无需任何配置,打开网站即可使用
 
