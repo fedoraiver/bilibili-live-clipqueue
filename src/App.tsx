@@ -100,10 +100,15 @@ function App() {
           setIsConnected(false);
           console.error("getOpenData Error:", err);
 
-          const shouldRetry = true;
+          const shouldRetry =
+            typeof err?.message === "string" &&
+            (err.message.includes("请求冷却期") ||
+              err.message.includes("房间重复游戏"));
           if (shouldRetry) {
             console.log("30秒后尝试重连...");
             retryTimeout = setTimeout(connect, 30 * 1000);
+          } else {
+            console.log("密码错误");
           }
         }
       }
