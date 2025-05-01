@@ -60,7 +60,7 @@ async function getHmacSha256(key: string, message: string) {
 
 const START_URL = "https://live-open.biliapi.com/v2/app/start";
 const HEARTBEAT_URL = "https://live-open.biliapi.com/v2/app/heartbeat";
-const END_URL = "https://live-open.biliapi.com/v2/app/end";
+// const END_URL = "https://live-open.biliapi.com/v2/app/end";
 
 async function callApi(url: any, data: any, akId: any, akSecret: any) {
   const body = JSON.stringify(data);

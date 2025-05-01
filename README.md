@@ -80,26 +80,12 @@ wss connect issue
 
 阅读开发手册:连接细节，错误类型等等
 
-重连逻辑待改进
-
 histroyvideos 取消 localstorage 的机制 增加 histroyvideos 数量限制。
 
-增加一个页面用于 obs 的 browser source
+增加一个页面用于 obs 的 browser source(弹幕显示，送礼物显示，付费留言显示等)
+
+与 obs 联动(最终替代 streamer.bot)
 
 history 数据结构和算法改进
 
 多线程 多进程
-
-add home clear button
-
-homepage
-
-MyClipQueue sessiondata
-
-darkmode toggle
-
-website ui
-
-youtube video support
-
-danmaku

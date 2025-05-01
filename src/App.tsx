@@ -100,7 +100,7 @@ function App() {
           setIsConnected(false);
           console.error("getOpenData Error:", err);
 
-          const shouldRetry = !(err.name === "DataError");
+          const shouldRetry = true;
           if (shouldRetry) {
             console.log("30秒后尝试重连...");
             retryTimeout = setTimeout(connect, 30 * 1000);
