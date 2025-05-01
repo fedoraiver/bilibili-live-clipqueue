@@ -69,44 +69,54 @@ function App() {
 
   useEffect(() => {
     let cleanupHeartBeat = () => {};
+    let retryTimeout: NodeJS.Timeout | null = null;
+    let stopped = false;
 
-    getOpenData(
-      AKId ? AKId : "",
-      AKSecret ? AKSecret : "",
-      parseInt(AppId ? AppId : ""),
-      AuthCode ? AuthCode : "",
-      (success: boolean) => {
-        setIsConnected(success);
-      }
-    )
-      .then(
-        ({
-          data,
-          clearHeartBeat,
-        }: {
-          data: any;
-          clearHeartBeat: () => void;
-        }) => {
-          cleanupHeartBeat = clearHeartBeat;
+    const connect = async () => {
+      if (stopped) return; // 如果 useEffect 被清除，不再尝试
 
-          //console.log(data);
-          let newlive = new KeepLiveWS(data.anchor_info.room_id, {
-            address: data.websocket_info.wss_link[0],
-            authBody: JSON.parse(data.websocket_info.auth_body),
-          });
-          newlive.interval = 1000;
-          setLive(newlive);
+      try {
+        const { data, clearHeartBeat } = await getOpenData(
+          AKId || "",
+          AKSecret || "",
+          parseInt(AppId || ""),
+          AuthCode || "",
+          (success) => {
+            if (!stopped) setIsConnected(success);
+          }
+        );
+
+        // 成功后设置心跳清理函数
+        cleanupHeartBeat = clearHeartBeat;
+
+        const newlive = new KeepLiveWS(data.anchor_info.room_id, {
+          address: data.websocket_info.wss_link[0],
+          authBody: JSON.parse(data.websocket_info.auth_body),
+        });
+        newlive.interval = 1000;
+        if (!stopped) setLive(newlive);
+      } catch (err: any) {
+        if (!stopped) {
+          setIsConnected(false);
+          console.error("getOpenData Error:", err);
+
+          const shouldRetry = !(err.name === "DataError");
+          if (shouldRetry) {
+            console.log("30秒后尝试重连...");
+            retryTimeout = setTimeout(connect, 30 * 1000);
+          }
         }
-      )
-      .catch((e) => {
-        setIsConnected(false);
-        console.log("getopenData Error:", e);
-      });
+      }
+    };
+
+    connect(); // 初始连接
 
     return () => {
-      console.log("尝试连接中");
+      console.log("尝试连接");
       cleanupHeartBeat();
       setIsConnected(false);
+      stopped = true; // 退出标志
+      if (retryTimeout) clearTimeout(retryTimeout);
     };
   }, [AKId, AKSecret, AppId, AuthCode]);
 

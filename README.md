@@ -78,7 +78,9 @@ wss connect issue
 
 ## To Do
 
-重连逻辑
+阅读开发手册:连接细节，错误类型等等
+
+重连逻辑待改进
 
 histroyvideos 取消 localstorage 的机制 增加 histroyvideos 数量限制。
 
