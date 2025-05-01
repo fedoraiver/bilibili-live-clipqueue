@@ -74,9 +74,13 @@ npm run dev
 
 ## Bug To Fix
 
+按了自动播放后当前的视频不会自动播放
+
 wss connect issue
 
 ## To Do
+
+指示灯增加黄色代表正在重连
 
 阅读开发手册:连接细节，错误类型等等
 
