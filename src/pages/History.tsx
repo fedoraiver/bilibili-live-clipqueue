@@ -30,6 +30,12 @@ function Histroty() {
           flexGrow: 1,
           overflowY: "auto",
           marginBottom: "10px",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "flex-start", // 左对齐
+          rowGap: "10px",
+          columnGap: "10px",
+          alignContent: "flex-start", // 顶部对齐
         }}
       >
         {historyVideos.length > 0 ? (
@@ -45,7 +51,9 @@ function Histroty() {
             />
           ))
         ) : (
-          <p style={{ textAlign: "center", color: "#666" }}>暂无历史记录</p>
+          <p style={{ textAlign: "center", color: "#666", width: "100%" }}>
+            暂无历史记录
+          </p>
         )}
       </div>
 

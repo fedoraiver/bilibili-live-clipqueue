@@ -92,7 +92,11 @@ function Queue() {
           overflow: "auto",
         }}
       >
-        <BiliBiliVideo src={src}></BiliBiliVideo>
+        {src ? (
+          <BiliBiliVideo src={src} />
+        ) : (
+          <p style={{ textAlign: "center", color: "#666" }}>暂无视频</p>
+        )}
       </div>
       <div
         style={{
