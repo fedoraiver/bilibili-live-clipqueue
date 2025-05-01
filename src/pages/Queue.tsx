@@ -102,7 +102,7 @@ function Queue() {
           backgroundColor: "#fff",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-around", // 或者 space-between
+          justifyContent: "space-around",
           gap: "10px",
         }}
       >
@@ -112,8 +112,9 @@ function Queue() {
             {
               let pastSrc = MyClipQueue.dequeue();
               let history = JSON.parse(localStorage.getItem("history") || "[]");
-              if (!history.includes(pastSrc) && pastSrc !== null)
+              if (!history.includes(pastSrc) && pastSrc !== null) {
                 history.push(pastSrc);
+              }
               setClipNum(MyClipQueue.Num());
               localStorage.setItem("history", JSON.stringify(history));
             }

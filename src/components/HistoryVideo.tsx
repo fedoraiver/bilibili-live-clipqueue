@@ -3,11 +3,12 @@ import { Data } from "../App";
 import { DataContext } from "../App";
 import Button from "./Button";
 
-interface HistortyVideoProps {
+interface HistoryVideoProps {
   bvid: string;
+  onRemove: (bvid: string) => void;
 }
 
-function HistortyVideo({ bvid }: HistortyVideoProps) {
+function HistoryVideo({ bvid, onRemove }: HistoryVideoProps) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [coverUrl, setCoverUrl] = useState("");
@@ -40,6 +41,7 @@ function HistortyVideo({ bvid }: HistortyVideoProps) {
     let history = JSON.parse(localStorage.getItem("history") || "[]");
     history = history.filter((bv: string) => bv !== `/${bvid}`);
     localStorage.setItem("history", JSON.stringify(history));
+    onRemove(bvid);
   };
 
   if (!isRendered) {
@@ -86,4 +88,4 @@ function HistortyVideo({ bvid }: HistortyVideoProps) {
   );
 }
 
-export default HistortyVideo;
+export default HistoryVideo;
