@@ -28,7 +28,7 @@ function HistoryVideo({ bvid, onRemove }: HistoryVideoProps) {
       .then((data) => {
         setTitle(data.title);
         setAuthor(data.up);
-        setCoverUrl(data.url.replace(/^http:/, "https:"));
+        setCoverUrl(data.url);
       })
       .catch((error) => {
         console.error("fetch api.bilibili.com Error:", error);

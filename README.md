@@ -78,13 +78,13 @@ wss connect issue
 
 ## To Do
 
+histroyvideos 取消 localstorage 的机制 增加 histroyvideos 数量限制。
+
 增加一个页面用于 obs 的 browser source
 
 history 数据结构和算法改进
 
 多线程 多进程
-
-add connenction indicator and reconnet feature
 
 add home clear button
 
