@@ -48,10 +48,37 @@ function HistortyVideo({ bvid }: HistortyVideoProps) {
 
   return (
     <>
-      <div className="card" style={{ width: "18rem" }}>
-        <div className="card-body">
-          <h5 className="card-title">{author}</h5>
-          <p className="card-text">{title}</p>
+      <div
+        className="card"
+        style={{
+          width: "18rem",
+          border: "none",
+          borderRadius: "10px",
+          overflow: "hidden",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <img
+          src={coverUrl}
+          style={{ width: "100%", height: "10rem", objectFit: "cover" }}
+        />
+        <div className="card-body" style={{ padding: "10px" }}>
+          <h5
+            className="card-title"
+            style={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              marginBottom: "5px",
+            }}
+          >
+            {title}
+          </h5>
+          <p
+            className="card-text"
+            style={{ fontSize: "0.8rem", color: "#666" }}
+          >
+            {author}
+          </p>
           <Button ButtonName="加入队列" ClickHandler={handleButtonClick} />
         </div>
       </div>
