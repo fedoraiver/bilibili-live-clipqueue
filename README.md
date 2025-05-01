@@ -78,22 +78,14 @@ wss connect issue
 
 ## To Do
 
-multithread!!!!
-
+增加一个页面用于 obs 的 browser source
+history 数据结构和算法改进
+多线程 多进程
 add connenction indicator and reconnet feature
-
-write and draw project data structure
-
 add home clear button
-
 homepage
-
 MyClipQueue sessiondata
-
 darkmode toggle
-
 website ui
-
 youtube video support
-
 danmaku
