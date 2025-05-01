@@ -61,32 +61,52 @@ function App() {
   const [Autoplay, setAutoplay] = useState(
     localStorage.getItem("Autoplay") == "true" ? true : false
   );
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     GetActions(StreamerBotHttpServerUrl);
   }, [StreamerBotHttpServerUrl]);
 
   useEffect(() => {
+    let cleanupHeartBeat = () => {};
+
     getOpenData(
       AKId ? AKId : "",
       AKSecret ? AKSecret : "",
       parseInt(AppId ? AppId : ""),
-      AuthCode ? AuthCode : ""
+      AuthCode ? AuthCode : "",
+      (success: boolean) => {
+        setIsConnected(success);
+      }
     )
-      .then((data) => {
-        let newlive = new KeepLiveWS(data.anchor_info.room_id, {
-          address: data.websocket_info.wss_link[0],
-          authBody: JSON.parse(data.websocket_info.auth_body),
-        });
-        newlive.interval = 1000;
-        setLive(newlive);
-      })
+      .then(
+        ({
+          data,
+          clearHeartBeat,
+        }: {
+          data: any;
+          clearHeartBeat: () => void;
+        }) => {
+          cleanupHeartBeat = clearHeartBeat;
+
+          //console.log(data);
+          let newlive = new KeepLiveWS(data.anchor_info.room_id, {
+            address: data.websocket_info.wss_link[0],
+            authBody: JSON.parse(data.websocket_info.auth_body),
+          });
+          newlive.interval = 1000;
+          setLive(newlive);
+        }
+      )
       .catch((e) => {
+        setIsConnected(false);
         console.log("getopenData Error:", e);
       });
 
     return () => {
-      console.log("wss service for bilibili-live shutdown");
+      console.log("尝试连接中");
+      cleanupHeartBeat();
+      setIsConnected(false);
     };
   }, [AKId, AKSecret, AppId, AuthCode]);
 
@@ -125,7 +145,7 @@ function App() {
           }}
         >
           {/* 顶部固定 NavBar */}
-          <NavBar />
+          <NavBar isConnected={isConnected} />
 
           {/* 主体内容区 */}
           <div

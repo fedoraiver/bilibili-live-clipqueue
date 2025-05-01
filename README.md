@@ -78,6 +78,8 @@ wss connect issue
 
 ## To Do
 
+重连逻辑
+
 histroyvideos 取消 localstorage 的机制 增加 histroyvideos 数量限制。
 
 增加一个页面用于 obs 的 browser source

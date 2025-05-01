@@ -60,7 +60,7 @@ async function getHmacSha256(key: string, message: string) {
 
 const START_URL = "https://live-open.biliapi.com/v2/app/start";
 const HEARTBEAT_URL = "https://live-open.biliapi.com/v2/app/heartbeat";
-// const END_URL = "https://live-open.biliapi.com/v2/app/end";
+//const END_URL = "https://live-open.biliapi.com/v2/app/end";
 
 async function callApi(url: any, data: any, akId: any, akSecret: any) {
   const body = JSON.stringify(data);
@@ -78,27 +78,50 @@ export async function getOpenData(
   akId: string,
   akSecret: string,
   appId: number,
-  authCode: string
-) {
+  authCode: string,
+  onHeartbeat?: (success: boolean) => void
+) : Promise<{ data: any; clearHeartBeat: () => void }>{
   const startRes = await callApi(
     START_URL,
     { code: authCode, app_id: appId },
     akId,
     akSecret
   );
+
   const { code, message, data } = startRes;
-  if (code !== 0) throw new Error(message);
+  if (code !== 0) {
+    throw new Error(message);
+  }
   const gameId = data.game_info.game_id;
-  if (!gameId) throw new Error("no game id");
-  setInterval(async () => {
-    const heartbeatRet = await callApi(
-      HEARTBEAT_URL,
-      { game_id: gameId },
-      akId,
-      akSecret
-    );
-    if (heartbeatRet.code === 0) console.log("running");
-    else console.error("open heartbeat error", heartbeatRet);
+  // if (!gameId) {
+  //   throw new Error("no game id");
+  // }
+
+   const intervalId = setInterval(async () => {
+    try {
+      const heartbeatRet = await callApi(
+        HEARTBEAT_URL,
+        { game_id: gameId },
+        akId,
+        akSecret
+      );
+
+      if (heartbeatRet.code === 0) {
+        console.log("连接正常");
+        onHeartbeat?.(true);
+      } else {
+        console.error("open heartbeat error", heartbeatRet);
+        onHeartbeat?.(false);
+      }
+    } catch (err) {
+      console.error("heartbeat exception", err);
+      onHeartbeat?.(false);
+    }
   }, 20 * 1000);
-  return data;
+
+  // 返回数据和清理函数
+  return {
+    data,
+    clearHeartBeat: () => clearInterval(intervalId),
+  };
 }
