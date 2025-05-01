@@ -77,24 +77,33 @@ function Queue() {
         flexDirection: "column",
         height: "100vh",
         boxSizing: "border-box",
-        padding: "20px",
+        paddingRight: "20px",
+        paddingBottom: "70px",
+        paddingLeft: "20px",
       }}
     >
       <div
         style={{
           flexGrow: 1,
-          overflow: "hidden",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "10px",
+          overflow: "auto",
         }}
       >
         <BiliBiliVideo src={src}></BiliBiliVideo>
       </div>
-
       <div
         style={{
           flexShrink: 0,
           borderTop: "1px solid #eee",
-          paddingTop: "10px",
+          padding: "10px 20px",
           backgroundColor: "#fff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around", // 或者 space-between
+          gap: "10px",
         }}
       >
         <Button
