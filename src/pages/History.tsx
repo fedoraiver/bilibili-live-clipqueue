@@ -16,14 +16,42 @@ function Histroty() {
   }, []);
 
   return (
-    <>
-      <Button ButtonName="清空历史" ClickHandler={handleClearClick}></Button>
-      <div>
-        {historyVideos.map((bvid) => (
-          <HistortyVideo key={bvid} bvid={(bvid as string).substring(1)} />
-        ))}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        boxSizing: "border-box",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          flexGrow: 1,
+          overflowY: "auto",
+          marginBottom: "10px",
+        }}
+      >
+        {historyVideos.length ? (
+          historyVideos.map((bvid) => (
+            <HistortyVideo key={bvid} bvid={(bvid as string).substring(1)} />
+          ))
+        ) : (
+          <p style={{ textAlign: "center", color: "#666" }}>暂无历史记录</p>
+        )}
       </div>
-    </>
+
+      <div
+        style={{
+          flexShrink: 0,
+          borderTop: "1px solid #eee",
+          paddingTop: "10px",
+          backgroundColor: "#fff",
+        }}
+      >
+        <Button ButtonName="清空历史" ClickHandler={handleClearClick} />
+      </div>
+    </div>
   );
 }
 

@@ -25,12 +25,17 @@ function Queue() {
   MyClipQueue.setCapacity(ClipLimit ? parseInt(ClipLimit) : 0);
 
   useEffect(() => {
-    live.on("heartbeat", () => console.log("running"));
-    live.on("msg", (data) => {
+    const handleMsg = (data: any) => {
       console.log(data);
       setCmd(data.cmd);
       setWssData(JSON.stringify(data.data));
-    });
+    };
+
+    live.on("msg", handleMsg);
+
+    return () => {
+      live.off("msg", handleMsg);
+    };
   }, [live]);
 
   useEffect(() => {
@@ -66,42 +71,67 @@ function Queue() {
   }, [ClipNum]);
 
   return (
-    <>
-      <BiliBiliVideo src={src}></BiliBiliVideo>
-      <Button
-        ButtonName="下一个"
-        ClickHandler={() => {
-          {
-            let pastSrc = MyClipQueue.dequeue();
-            let history = JSON.parse(localStorage.getItem("history") || "[]");
-            if (!history.includes(pastSrc) && pastSrc !== null)
-              history.push(pastSrc);
-            setClipNum(MyClipQueue.Num());
-            localStorage.setItem("history", JSON.stringify(history));
-          }
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        boxSizing: "border-box",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          flexGrow: 1,
+          overflow: "hidden",
         }}
-      ></Button>
-      <Switch
-        SwitchName="运行"
-        Checked={IsRunning}
-        ClickHandler={(value) => {
-          setIsRunning(value);
-          localStorage.setItem("IsRunning", value.toString());
+      >
+        <BiliBiliVideo src={src}></BiliBiliVideo>
+      </div>
+
+      <div
+        style={{
+          flexShrink: 0,
+          borderTop: "1px solid #eee",
+          paddingTop: "10px",
+          backgroundColor: "#fff",
         }}
-      ></Switch>
-      <Switch
-        SwitchName="自动播放"
-        Checked={Autoplay}
-        ClickHandler={(value) => {
-          setAutoplay(value);
-          localStorage.setItem("Autoplay", value.toString());
-        }}
-      ></Switch>
-      <ScoreBoard
-        ClipNum={ClipNum}
-        ClipLimit={MyClipQueue.getCapacity()}
-      ></ScoreBoard>
-    </>
+      >
+        <Button
+          ButtonName="下一个"
+          ClickHandler={() => {
+            {
+              let pastSrc = MyClipQueue.dequeue();
+              let history = JSON.parse(localStorage.getItem("history") || "[]");
+              if (!history.includes(pastSrc) && pastSrc !== null)
+                history.push(pastSrc);
+              setClipNum(MyClipQueue.Num());
+              localStorage.setItem("history", JSON.stringify(history));
+            }
+          }}
+        ></Button>
+        <Switch
+          SwitchName="运行"
+          Checked={IsRunning}
+          ClickHandler={(value) => {
+            setIsRunning(value);
+            localStorage.setItem("IsRunning", value.toString());
+          }}
+        ></Switch>
+        <Switch
+          SwitchName="自动播放"
+          Checked={Autoplay}
+          ClickHandler={(value) => {
+            setAutoplay(value);
+            localStorage.setItem("Autoplay", value.toString());
+          }}
+        ></Switch>
+        <ScoreBoard
+          ClipNum={ClipNum}
+          ClipLimit={MyClipQueue.getCapacity()}
+        ></ScoreBoard>
+      </div>
+    </div>
   );
 }
 

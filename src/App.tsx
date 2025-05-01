@@ -116,13 +116,32 @@ function App() {
           live,
         }}
       >
-        <NavBar />
-        <Routes>
-          <Route path="" element={<Home />} />
-          <Route path="/queue" element={<Queue />} />
-          <Route path="/history" element={<History />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100vh", // 整个视口高度
+            overflow: "hidden", // 隐藏滚动，交给子组件自己处理
+          }}
+        >
+          {/* 顶部固定 NavBar */}
+          <NavBar />
+
+          {/* 主体内容区 */}
+          <div
+            style={{
+              flex: 1, // 填满 NavBar 以外的所有空间
+              overflow: "hidden", // 子组件内自己做滚动
+            }}
+          >
+            <Routes>
+              <Route path="" element={<Home />} />
+              <Route path="/queue" element={<Queue />} />
+              <Route path="/history" element={<History />} />
+              <Route path="*" element={<Error />} />
+            </Routes>
+          </div>
+        </div>
       </DataContext.Provider>
     </>
   );
