@@ -16,19 +16,17 @@ function HistoryVideo({ bvid, onRemove }: HistoryVideoProps) {
   const [isRendered, setIsRendered] = useState(true);
 
   useEffect(() => {
-    fetch(
-      `https://apiv2.magecorn.com/bilicover/get?type=bv&id=${bvid}&client=2.6.0`
-    )
+    fetch(`https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("获取视频信息错误");
         }
         return response.json();
       })
       .then((data) => {
-        setTitle(data.title);
-        setAuthor(data.up);
-        setCoverUrl(data.url);
+        setTitle(data.data.title);
+        setAuthor(data.data.owner.name);
+        setCoverUrl(data.data.pic);
       })
       .catch((error) => {
         console.error(error);
@@ -62,6 +60,7 @@ function HistoryVideo({ bvid, onRemove }: HistoryVideoProps) {
       >
         <img
           src={coverUrl}
+          referrerPolicy="no-referrer"
           style={{ width: "100%", height: "10rem", objectFit: "cover" }}
         />
         <div className="card-body" style={{ padding: "10px" }}>

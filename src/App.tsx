@@ -100,7 +100,10 @@ function App() {
           setIsConnected(false);
           console.error(err);
 
-          const shouldRetry = err.message == "7001" || err.message == "7002";
+          const shouldRetry =
+            err.message == "7001" ||
+            err.message == "7002" ||
+            err.message == "4004";
           if (shouldRetry) {
             console.log("30秒后尝试重连...");
             retryTimeout = setTimeout(connect, 30 * 1000);

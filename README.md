@@ -84,6 +84,8 @@ wss connect issue
 
 指示灯增加黄色代表正在重连
 
+历史记录 图片加载不出来
+
 阅读开发手册:连接细节，错误类型等等
 
 histroyvideos 取消 localstorage 的机制 增加 histroyvideos 数量限制。
