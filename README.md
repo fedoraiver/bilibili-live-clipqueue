@@ -74,6 +74,8 @@ npm run dev
 
 ## Bug To Fix
 
+按了自动播放后历史记录消失
+
 按了自动播放后当前的视频不会自动播放
 
 streamerBotHttp 不会重连
@@ -84,8 +86,6 @@ wss connect issue
 
 指示灯增加黄色代表正在重连
 
-历史记录 图片加载不出来
-
 阅读开发手册:连接细节，错误类型等等
 
 histroyvideos 取消 localstorage 的机制 增加 histroyvideos 数量限制。
@@ -95,5 +95,3 @@ histroyvideos 取消 localstorage 的机制 增加 histroyvideos 数量限制。
 与 obs 联动(最终替代 streamer.bot)
 
 history 数据结构和算法改进
-
-多线程 多进程
