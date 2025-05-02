@@ -105,8 +105,8 @@ function App() {
             err.message == "7002" ||
             err.message == "4004";
           if (shouldRetry) {
-            console.log("30秒后尝试重连...");
-            retryTimeout = setTimeout(connect, 30 * 1000);
+            console.log("10秒后尝试重连...");
+            retryTimeout = setTimeout(connect, 10 * 1000);
           } else {
             console.log("密码错误");
           }
