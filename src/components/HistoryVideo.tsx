@@ -31,7 +31,7 @@ function HistoryVideo({ bvid, onRemove }: HistoryVideoProps) {
         setCoverUrl(data.url);
       })
       .catch((error) => {
-        console.error("fetch api.bilibili.com Error:", error);
+        console.error(error);
       });
   }, [bvid]);
 
@@ -39,7 +39,7 @@ function HistoryVideo({ bvid, onRemove }: HistoryVideoProps) {
     MyClipQueue.enqueue(`/${bvid}`);
     setIsRendered(false);
     let history = JSON.parse(localStorage.getItem("history") || "[]");
-    history = history.filter((bv: string) => bv !== `/${bvid}`);
+    history = history.filter((bv: string) => bv != `/${bvid}`);
     localStorage.setItem("history", JSON.stringify(history));
     onRemove(bvid);
   };

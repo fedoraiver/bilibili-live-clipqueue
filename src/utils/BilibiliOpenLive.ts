@@ -89,14 +89,11 @@ export async function getOpenData(
   );
 
   console.log("连接中");
-  const { code, message, data } = startRes;
-  if (code !== 0) {
-    throw new Error(message);
+  if (startRes.code != 0) {
+    throw new Error(startRes.code);
   }
+  const data=startRes.data;
   const gameId = data.game_info.game_id;
-  // if (!gameId) {
-  //   throw new Error("no game id");
-  // }
 
    const intervalId = setInterval(async () => {
     try {
@@ -107,18 +104,19 @@ export async function getOpenData(
         akSecret
       );
 
-      if (heartbeatRet.code === 0) {
+      // console.log(heartbeatRet);
+      if (heartbeatRet.code == 0) {
         console.log("连接正常");
         onHeartbeat?.(true);
       } else {
-        console.error("open heartbeat error", heartbeatRet);
         onHeartbeat?.(false);
+        throw new Error(heartbeatRet.code);
       }
     } catch (err) {
-      console.error("heartbeat exception", err);
       onHeartbeat?.(false);
+      throw err;
     }
-  }, 20 * 1000);
+  }, 30 * 1000);
 
   // 返回数据和清理函数
   return {

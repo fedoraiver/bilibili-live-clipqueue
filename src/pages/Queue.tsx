@@ -44,7 +44,7 @@ function Queue() {
       localStorage.getItem("StreamerBotHttpServerUrl") || "";
     let CustomScript = localStorage.getItem("CustomScript") || "";
     if (IsRunning == true) {
-      if (cmd === "LIVE_OPEN_PLATFORM_DM") {
+      if (cmd == "LIVE_OPEN_PLATFORM_DM") {
         let msg: string = JsonData.msg;
         if (
           msg.startsWith("/BV") &&
@@ -116,7 +116,7 @@ function Queue() {
             {
               let pastSrc = MyClipQueue.dequeue();
               let history = JSON.parse(localStorage.getItem("history") || "[]");
-              if (!history.includes(pastSrc) && pastSrc !== null) {
+              if (!history.includes(pastSrc) && pastSrc != null) {
                 history.push(pastSrc);
               }
               setClipNum(MyClipQueue.Num());

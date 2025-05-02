@@ -33,11 +33,11 @@ class ClipQueue {
   }
 
   isEmpty() {
-    return this.items.length === 0;
+    return this.items.length == 0;
   }
 
   isFull() {
-    return this.items.length === this.capacity;
+    return this.items.length == this.capacity;
   }
 
   setCapacity(newCapacity: number) {

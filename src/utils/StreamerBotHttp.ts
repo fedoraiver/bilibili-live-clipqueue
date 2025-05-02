@@ -9,7 +9,7 @@ export function GetActions(StreamerBotHttpServerUrl: string) {
     .then((data) => {
       localStorage.setItem("actions", JSON.stringify(data.actions));
     })
-    .catch((e) => console.error("GetActions Error:", e));
+    .catch((e) => console.error( e));
 
   return () => {
     console.log("http service for streamer.bot shutdown");
@@ -29,13 +29,13 @@ export function DoAction(
     body: JSON.stringify({
       action: {
         id: JSON.parse(localStorage.getItem("actions") || "[]").find(
-          (action: any) => action.name === name
+          (action: any) => action.name == name
         ).id,
         name: name,
       },
       args: data,
     }),
-  }).catch((e) => console.error("DoAction Error:", e));
+  }).catch((e) => console.error( e));
 }
 
 export function CustomScriptAction(
@@ -53,7 +53,7 @@ export function CustomScriptAction(
     }
 
     const [command, action] = parts;
-    if (command === cmd) {
+    if (command == cmd) {
       DoAction(StreamerBotHttpServerUrl, action, JsonData);
     }
   });

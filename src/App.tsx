@@ -98,12 +98,9 @@ function App() {
       } catch (err: any) {
         if (!stopped) {
           setIsConnected(false);
-          console.error("getOpenData Error:", err);
+          console.error(err);
 
-          const shouldRetry =
-            typeof err?.message === "string" &&
-            (err.message.includes("请求冷却期") ||
-              err.message.includes("房间重复游戏"));
+          const shouldRetry = err.message == "7001" || err.message == "7002";
           if (shouldRetry) {
             console.log("30秒后尝试重连...");
             retryTimeout = setTimeout(connect, 30 * 1000);

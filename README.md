@@ -76,6 +76,8 @@ npm run dev
 
 按了自动播放后当前的视频不会自动播放
 
+streamerBotHttp 不会重连
+
 wss connect issue
 
 ## To Do
