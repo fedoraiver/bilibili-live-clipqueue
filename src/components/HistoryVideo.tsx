@@ -16,7 +16,9 @@ function HistoryVideo({ bvid, onRemove }: HistoryVideoProps) {
   const [isRendered, setIsRendered] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`)
+    fetch(
+      `https://apiv2.magecorn.com/bilicover/get?type=bv&id=${bvid}&client=2.6.0`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("获取视频信息错误");
@@ -24,9 +26,9 @@ function HistoryVideo({ bvid, onRemove }: HistoryVideoProps) {
         return response.json();
       })
       .then((data) => {
-        setTitle(data.data.title);
-        setAuthor(data.data.owner.name);
-        setCoverUrl(data.data.pic);
+        setTitle(data.title);
+        setAuthor(data.up);
+        setCoverUrl(data.url);
       })
       .catch((error) => {
         console.error(error);
