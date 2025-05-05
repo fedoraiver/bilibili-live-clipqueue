@@ -74,19 +74,17 @@ npm run dev
 
 ## Bug To Fix
 
-按了自动播放后历史记录消失
-
-按了自动播放后当前的视频不会自动播放
-
-streamerBotHttp 不会重连
-
-wss connect issue
+自动播放按钮有 bug 按了自动播放后历史记录消失
 
 ## To Do
 
-指示灯增加黄色代表正在重连
+增加功能,仿照:https://jakemiki.me/twitch-clip-queue/queue
 
-阅读开发手册:连接细节，错误类型等等
+当前视频播放完后如果勾选了自动播放就自动播放下一个视频
+
+streamerBotHttp 重连
+
+指示灯增加黄色代表正在重连
 
 histroyvideos 取消 localstorage 的机制 增加 histroyvideos 数量限制。
 
