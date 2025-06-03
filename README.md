@@ -78,9 +78,13 @@ npm run dev
 
 ## To Do
 
+加入直播姬 h5 玩法
+
 增加功能,仿照:https://jakemiki.me/twitch-clip-queue/queue
 
 当前视频播放完后如果勾选了自动播放就自动播放下一个视频
+
+远程按钮(集成进 stream deck)
 
 streamerBotHttp 重连
 
